@@ -1,0 +1,37 @@
+.popup {
+  display: block;
+  position: absolute;
+  top: -250px;
+  left: 50%;
+  z-index: 100000;
+  transform: translateX(-50%);
+  width: 250px;
+  background-color: #242b52;
+  border: 1px solid #121a46;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  animation: slideDown 0.5s forwards;
+  border-radius: 0.3rem;
+}
+@media (min-width: 768px) {
+  .popup {
+    width: 500px; /* Độ rộng cho màn hình laptop */
+  }
+}
+
+.close {
+  position: absolute;
+
+  right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+@keyframes slideDown {
+  from {
+    top: -200px;
+  }
+  to {
+    top: 50px;
+  }
+}
