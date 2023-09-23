@@ -2,6 +2,8 @@ import { AiTool } from "@/types/ai-tool";
 import Image from "next/image";
 import Link from "next/link";
 import style from "./SingleResultItem.module.css";
+import { useState } from "react";
+import DetailPopup from "@/components/DetailPopup";
 const SingleResultItem = ({ blog }: { blog: AiTool }) => {
   const {
     name: title,
@@ -12,6 +14,12 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
     price_from,
     website_url,
   } = blog;
+
+  const [selectedItem, setSelectedItem] = useState(null);
+  console.log(
+    "🚀 ~ file: SingleResultItem.tsx:19 ~ SingleResultItem ~ selectedItem:",
+    selectedItem
+  );
   return (
     <>
       <div
@@ -26,7 +34,20 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
               {pricing_type}
             </span>
           )}
-          <div className={style["image-container"]}>
+          <div
+            className={style["image-container"]}
+            onClick={() =>
+              setSelectedItem({
+                name: title,
+                photo,
+                short_description,
+                tags,
+                pricing_type,
+                price_from,
+                website_url,
+              })
+            }
+          >
             <Image src={photo} alt="image" fill />
           </div>
         </Link>
@@ -86,7 +107,7 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
                 <span className="ml-2">Visit Website</span>
               </a>
             </div>
-            {/* <div className="flex w-1/2 items-center justify-center">
+            <div className="flex w-1/2 items-center justify-center">
               <button className="bg-grey-light hover:bg-grey text-grey-darkest inline-flex items-center rounded px-4 py-2 font-bold">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -104,10 +125,23 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
                 </svg>
                 <span className="ml-2">Favorite</span>
               </button>
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
+
+      {selectedItem && (
+        <DetailPopup
+          title={selectedItem?.name}
+          description={selectedItem?.short_description}
+          imageUrl={selectedItem?.photo}
+          closePopup={setSelectedItem}
+          tags={selectedItem.tags}
+          website_url={selectedItem.website_url}
+          price_from={selectedItem?.price_from}
+          pricing_type={selectedItem?.pricing_type}
+        />
+      )}
     </>
   );
 };

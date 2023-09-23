@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import styles from "./SearchPopup.module.css";
 const tagLits = ["Tag 1", "Tag 2", "Tag 3", "Tag 4", "Tag 5", "Tag 6"];
 const pricingTypeLits = ["Free", "Paid", "Freemium"];
+import { useTheme } from "next-themes";
 interface Props {
   togglePopup: (type: boolean) => void;
   isOpen: boolean;
@@ -12,7 +13,8 @@ const SearchPopup = (props: Props) => {
   const [tags, setTags] = useState<string[]>([]);
   const [pricingTypes, setPricingTypes] = useState<string[]>([]);
   const popupRef = useRef(null);
-
+  const theme = useTheme();
+  console.log("🚀 ~ file: index.tsx:17 ~ DetailPopup ~ theme:", theme);
   const handleDocumentClick = (e: MouseEvent) => {
     if (isOpen && popupRef.current && !popupRef.current.contains(e.target)) {
       togglePopup(false);
@@ -51,7 +53,10 @@ const SearchPopup = (props: Props) => {
     }
   };
   return (
-    <div className={styles.popup} ref={popupRef}>
+    <div
+      className={`${styles.popup} bg-white dark:bg-[#242B51]`}
+      ref={popupRef}
+    >
       <div className=" mt- flex flex-row items-center">
         <div />
         <p>Choose option to search</p>
@@ -67,10 +72,22 @@ const SearchPopup = (props: Props) => {
               key={index}
               className={`${
                 pricingTypes.includes(item) ? "bg-[#003cab]" : ""
-              } mb-2 mr-2 cursor-default rounded-md border p-1`}
+              } mb-2 mr-2 cursor-default rounded-md  p-1 ${
+                theme.theme == "light" && pricingTypes.includes(item)
+                  ? "border-[#003CAB]"
+                  : "border"
+              }`}
               onClick={() => choosePricing(item)}
             >
-              <p className="text-xs">{item}</p>
+              <p
+                className={`${
+                  theme.theme == "light" && pricingTypes.includes(item)
+                    ? "text-white"
+                    : ""
+                } text-xs`}
+              >
+                {item}
+              </p>
             </div>
           ))}
         </div>
@@ -83,10 +100,22 @@ const SearchPopup = (props: Props) => {
               key={index}
               className={`${
                 pricingTypes.includes(item) ? "bg-[#003cab]" : ""
-              } mb-2 mr-2 cursor-default rounded-md border p-1`}
+              } mb-2 mr-2 cursor-default rounded-md  p-1  ${
+                theme.theme == "light" && pricingTypes.includes(item)
+                  ? "border-[#003CAB]"
+                  : "border"
+              }`}
               onClick={() => choosePricing(item)}
             >
-              <p className="text-xs">{item}</p>
+              <p
+                className={`${
+                  theme.theme == "light" && pricingTypes.includes(item)
+                    ? "text-white"
+                    : ""
+                } text-xs`}
+              >
+                {item}
+              </p>
             </div>
           ))}
         </div>
@@ -95,15 +124,15 @@ const SearchPopup = (props: Props) => {
       <div className="mt-3 flex flex-row items-center justify-end">
         <button
           onClick={() => togglePopup(false)}
-          className="mr-4 rounded bg-[#32326e] px-2 py-1"
+          className="mr-4 rounded bg-[#F6F8FF] px-2 py-1 dark:bg-[#242b52]"
         >
           <p className="text-xs">Close</p>
         </button>
         <button
           onClick={() => togglePopup(false)}
-          className="rounded bg-[#003cab] px-2 py-1"
+          className="rounded bg-[#4A6CF7] px-2 py-1"
         >
-          <p className="text-xs">Search</p>
+          <p className="text-xs text-white">Search</p>
         </button>
       </div>
     </div>

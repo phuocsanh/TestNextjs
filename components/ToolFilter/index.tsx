@@ -17,7 +17,7 @@ const ToolFilter = () => {
         <div className="container">
           <div className="-mx-4 flex flex-wrap">
             <div className="w-full  px-4">
-              <div className="flex flex-row items-center">
+              <div className="flex flex-row ">
                 <label className="relative  mx-auto block w-[800px]  max-w-[800px]">
                   <span className="sr-only">Search</span>
                   <input
@@ -50,9 +50,11 @@ const ToolFilter = () => {
 
                 <button
                   onClick={() => setIsShowSearchPopup(true)}
-                  className="ml-2 rounded bg-[#003cab] px-2 py-1 sm:ml-2  sm:px-3 sm:py-2"
+                  className="ml-2 rounded bg-[#F6F8FF] px-2  py-1 dark:bg-[#242B51] sm:ml-2  sm:px-3 sm:py-2"
                 >
-                  <p className="text-sm">Advance Search</p>
+                  <p className="text-sm font-semibold text-[#000000] dark:text-white ">
+                    Advance Search
+                  </p>
                 </button>
               </div>
               <div
