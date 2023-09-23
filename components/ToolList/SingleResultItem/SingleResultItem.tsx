@@ -16,10 +16,7 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
   } = blog;
 
   const [selectedItem, setSelectedItem] = useState(null);
-  console.log(
-    "🚀 ~ file: SingleResultItem.tsx:19 ~ SingleResultItem ~ selectedItem:",
-    selectedItem
-  );
+
   return (
     <>
       <div
@@ -137,7 +134,7 @@ const SingleResultItem = ({ blog }: { blog: AiTool }) => {
           imageUrl={selectedItem?.photo}
           closePopup={setSelectedItem}
           tags={selectedItem.tags}
-          website_url={selectedItem.website_url}
+          website_url={selectedItem?.website_url}
           price_from={selectedItem?.price_from}
           pricing_type={selectedItem?.pricing_type}
         />

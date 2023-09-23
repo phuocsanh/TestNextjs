@@ -14,7 +14,6 @@ const SearchPopup = (props: Props) => {
   const [pricingTypes, setPricingTypes] = useState<string[]>([]);
   const popupRef = useRef(null);
   const theme = useTheme();
-  console.log("🚀 ~ file: index.tsx:17 ~ DetailPopup ~ theme:", theme);
   const handleDocumentClick = (e: MouseEvent) => {
     if (isOpen && popupRef.current && !popupRef.current.contains(e.target)) {
       togglePopup(false);
